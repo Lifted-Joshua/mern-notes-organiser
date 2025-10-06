@@ -8,6 +8,8 @@ A **full-stack MERN notes organiser application** for creating, managing, and or
 ## Highlights / Features
 - 🧱 Full-stack MERN application for managing notes efficiently
 - ✨ Create, update, and delete notes with a clean title and detailed description
+- 🔍 Dynamic search for notes with input debouncing for optimal performance
+- 📌 Pin and unpin notes, with automatic dynamic reordering
 - 🛠️ Fully functional REST API powering all operations
 - ⚡ Rate limiting implemented with Upstash Redis for smooth performance
 - 🚀 Fully responsive and modern user interface for desktop and mobile
