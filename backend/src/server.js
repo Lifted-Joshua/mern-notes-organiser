@@ -1,6 +1,7 @@
 import express from "express"; // Express library for creating server and routes
 import cors from "cors";        // CORS middleware to allow cross-origin requests
 import dotenv from "dotenv";    // Load environment variables from .env
+import path from "path" 
 
 
 import notesRoutes from "./routes/notesRoute.js"// Notes router
@@ -13,15 +14,18 @@ dotenv.config(); // Load .env variables into process.env
 
 const app = express();
 const PORT = process.env.PORT || 5001 // Server port fallback
+const __dirname = path.resolve();
 
 
+if(process.env.NODE_ENV !== "production") { //Cors enable if we are on local development
+    // Enable CORS for frontend
+    app.use(
+        cors({
+            origin:"http://localhost:5173", //Front-end URL
+        })
+    );
+}
 
-// Enable CORS for frontend
-app.use(
-    cors({
-        origin:"http://localhost:5173", //Front-end URL
-    })
-);
 
 
 // Middleware flow:
@@ -37,6 +41,13 @@ app.use(ratelimiter); // Apply custom rate limiter
 
 app.use("/api/notes", notesRoutes);// Forward requests starting with /api/notes to notesRoutes
 
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    });
+}
 
 // Connect to DB first, then start server
 connectDB().then(() => {
