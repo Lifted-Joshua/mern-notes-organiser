@@ -1,6 +1,6 @@
 # Notes Organiser (MERN Stack)
 
-![Homepage UI](assets/homepage.png)
+![Notes Organiser Screenshot](frontend/assets/NoteOrganiser.png)
 
 
 A **full-stack MERN notes organiser application** for creating, managing, and organising notes. Built with **React, Node.js, Express, MongoDB**, and styled with **Tailwind CSS & DaisyUI**.
